@@ -1,3 +1,0 @@
-/mnt/c/Users/Thien/OneDrive/Desktop/gitrepos/p-lang/build/CMakeFiles/p.dir
-/mnt/c/Users/Thien/OneDrive/Desktop/gitrepos/p-lang/build/CMakeFiles/edit_cache.dir
-/mnt/c/Users/Thien/OneDrive/Desktop/gitrepos/p-lang/build/CMakeFiles/rebuild_cache.dir

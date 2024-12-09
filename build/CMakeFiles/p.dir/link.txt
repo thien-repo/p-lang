@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/p.dir/src/lexer.cpp.o CMakeFiles/p.dir/src/p.cpp.o CMakeFiles/p.dir/src/standard.cpp.o CMakeFiles/p.dir/src/variable.cpp.o -o bin/p  /usr/local/lib/libfmt.a 
