@@ -1,0 +1,3 @@
+/home/thien/gitrepos/p-lang/build/CMakeFiles/p.dir
+/home/thien/gitrepos/p-lang/build/CMakeFiles/edit_cache.dir
+/home/thien/gitrepos/p-lang/build/CMakeFiles/rebuild_cache.dir
