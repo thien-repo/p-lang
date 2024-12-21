@@ -36,7 +36,7 @@ bool Scope::exists(const std::string& name){
 
 void Scope::print(){
     for(auto& [name, value] : variables){
-        std::cout << name << " = " << tos(value) << std::endl;
+        std::cout << name << " | " << tos(value) << std::endl;
     }
 }
 

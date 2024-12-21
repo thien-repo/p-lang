@@ -32,6 +32,11 @@ bool Lexer::next_expression(std::string& out, int& line){
         if(c == target){
             break;
         }
+        if(c == '\\'){
+            while(stream.get(c) and c != '\n');
+            line++;
+            continue;
+        }
         if(c == '\n'){
             line++;
             continue;
