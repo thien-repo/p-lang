@@ -1,6 +1,9 @@
 #include <p/scope.hpp>
 
 #include <p/exception.hpp>
+#include <p/standard.hpp>
+
+#include <iostream>
 
 namespace PL{
 
@@ -18,7 +21,23 @@ P Scope::get(std::string name){
     if(parent != nullptr){
         return parent->get(name);
     }
-    throw Exception(name + " undefined");
+    return error(name + " undefined");
+}
+
+bool Scope::exists(const std::string& name){
+    if(variables.find(name) != variables.end()){
+        return true;
+    }
+    if(parent != nullptr){
+        return parent->exists(name);
+    }
+    return false;
+}
+
+void Scope::print(){
+    for(auto& [name, value] : variables){
+        std::cout << name << " = " << tos(value) << std::endl;
+    }
 }
 
 }

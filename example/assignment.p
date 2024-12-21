@@ -1,3 +1,4 @@
 a: 1;
-b: 1b;
-c: 0b;
+bb: 2;
+ccc: 3;
+ddd: fff: 4;

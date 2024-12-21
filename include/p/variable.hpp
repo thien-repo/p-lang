@@ -28,6 +28,7 @@ using Data = std::variant<bool, long, double, std::string, List, Dict>;
 struct P {
     DATATYPE type;
     Data data;
+    P(DATATYPE, Data);
     P();
     P(bool);
     P(long);
@@ -38,6 +39,9 @@ struct P {
     P(List);
     P(Dict);
 };
+
+P error(std::string);
+
 
 };
 

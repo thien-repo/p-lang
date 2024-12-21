@@ -3,3 +3,4 @@
 #include <p/exception.hpp>
 #include <p/conversions.hpp>
 #include <p/scope.hpp>
+#include <lexer/lexer.hpp>

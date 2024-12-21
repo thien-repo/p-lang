@@ -8,7 +8,7 @@
 namespace PL{
     
 
-std::string tojs(P p) {
+std::string tos(P p) {
     switch (p.type) {
         case DATATYPE::BOOLEAN: { 
             return std::get<bool>(p.data) ? "1b" : "0b"; 
@@ -27,7 +27,7 @@ std::string tojs(P p) {
             std::stringstream ss;
             ss << "[";
             for(int i = 0; i < lst.size(); i++){
-                ss << tojs(lst[i]);
+                ss << tos(lst[i]);
                 if(i < lst.size() - 1){
                     ss << ",";
                 }
@@ -42,7 +42,7 @@ std::string tojs(P p) {
             size_t size = m.size();
             for(auto& kv : m){
                 ss << "\"" << kv.first << "\":";
-                ss << tojs(kv.second);
+                ss << tos(kv.second);
                 if(size > 1){
                     ss << ",";
                 }
@@ -51,8 +51,28 @@ std::string tojs(P p) {
             ss << "}";
             return ss.str();
         }
+        case DATATYPE::ERRORVALUE:{
+            return "Error: " + ps(p);
+        }
     }
     return "null";
+}
+
+std::string tocsv(P p){
+    std::stringstream ss;
+    Dict& m = pd(p);
+    for(auto& kv : m){
+        ss << kv.first << ",";
+    }
+    ss << std::endl;
+    List& l = pl(m.begin()->second);
+    for(int i = 0; i < l.size(); i++){
+        for(auto& kv : m){
+            ss << tos(pl(kv.second)[i]) << ",";
+        }
+        ss << std::endl;
+    }
+    return ss.str();
 }
 
 P join(P l, P r){
@@ -89,7 +109,7 @@ P drop(P ndrops, P p){
 }
 
 P console(P p){
-    std::cout << tojs(p) << std::endl;
+    std::cout << tos(p) << std::endl;
     return P();
 }
 

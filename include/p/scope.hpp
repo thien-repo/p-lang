@@ -9,6 +9,8 @@ class Scope{
         Scope(Scope* parent);
         void set(std::string name, P value);
         P get(std::string name);
+        bool exists(const std::string& name);
+        void print();
     private:
         Scope* parent;
         std::map<std::string, P> variables;

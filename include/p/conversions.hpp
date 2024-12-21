@@ -8,5 +8,4 @@ double& pf(P&);
 std::string& ps(P&);
 List& pl(P&);
 Dict& pd(P&);
-
 };
