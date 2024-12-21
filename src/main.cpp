@@ -55,6 +55,9 @@ bool evaluate(std::string expression, PL::Scope& scope){
     while(not st.empty()){
         std::string token = st.top();
         st.pop();
+        if(scope.exists(token)){
+            values.push(scope.get(token));
+        }
         if(token == ":"){
             std::string name = st.top();
             st.pop();
