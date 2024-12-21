@@ -18,7 +18,7 @@ P Scope::get(std::string name){
     if(parent != nullptr){
         return parent->get(name);
     }
-    throw Exception(name + " variable not found");
+    throw Exception(name + " undefined");
 }
 
 }
