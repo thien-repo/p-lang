@@ -2,12 +2,13 @@
 #include <sstream>
 #include <algorithm>
 #include <numeric>
-#include <fmt/format.h>
-
-namespace P{
+#include <p/exception.hpp>
+#include <p/conversions.hpp>
+#include <iostream>
+namespace PL{
     
 
-std::string tos(P p) {
+std::string tojs(P p) {
     switch (p.type) {
         case DATATYPE::BOOLEAN: { 
             return std::get<bool>(p.data) ? "1b" : "0b"; 
@@ -26,7 +27,7 @@ std::string tos(P p) {
             std::stringstream ss;
             ss << "[";
             for(int i = 0; i < lst.size(); i++){
-                ss << tos(lst[i]);
+                ss << tojs(lst[i]);
                 if(i < lst.size() - 1){
                     ss << ",";
                 }
@@ -41,7 +42,7 @@ std::string tos(P p) {
             size_t size = m.size();
             for(auto& kv : m){
                 ss << "\"" << kv.first << "\":";
-                ss << tos(kv.second);
+                ss << tojs(kv.second);
                 if(size > 1){
                     ss << ",";
                 }
@@ -55,7 +56,7 @@ std::string tos(P p) {
 }
 
 P join(P l, P r){
-    List rdata = std::get<List>(r.data);
+    List rdata = pl(r);
 
     std::copy(rdata.begin(), rdata.end(), std::back_inserter(
         std::get<List>(l.data)
@@ -64,7 +65,7 @@ P join(P l, P r){
 }
 
 P til(P p){
-    long size = std::get<long>(p.data);
+    long size = pi(p);
     std::vector<long> nums(size);
     std::iota(nums.begin(), nums.end(), 0);
     List pnums(size);
@@ -76,8 +77,8 @@ P til(P p){
 }
 
 P drop(P ndrops, P p){
-    long n = std::get<long>(ndrops.data);
-    List pdata = std::get<List>(p.data);
+    long n = pi(ndrops);
+    List pdata = pl(p);
     if(pdata.size() > n){
         pdata.erase(pdata.begin(), pdata.begin() + n);
     }
@@ -88,8 +89,15 @@ P drop(P ndrops, P p){
 }
 
 P console(P p){
-    fmt::print("{}\n", tos(p));
+    std::cout << tojs(p) << std::endl;
     return P();
+}
+
+P each(std::function<P(P)> func, P p){
+    List& pdata = pl(p);
+    List result( pl(p).size());
+    std::transform(pdata.begin(), pdata.end(), result.begin(), func);
+    return P(result);
 }
 
 }

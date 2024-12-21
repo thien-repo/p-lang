@@ -5,7 +5,7 @@
 #include <functional>
 #include <variant>
 
-namespace P{
+namespace PL{
 
 enum DATATYPE {
     BOOLEAN,
@@ -34,6 +34,7 @@ struct P {
     P(int);
     P(double);
     P(std::string);
+    P(const char*);
     P(List);
     P(Dict);
 };

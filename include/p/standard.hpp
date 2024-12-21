@@ -1,23 +1,15 @@
 #pragma once
 
 #include <p/variable.hpp>
+#include <p/conversions.hpp>
 
-namespace P{
-std::string tos(P);
+namespace PL{
+std::string tojs(P);
 
 P join(P, P);
 P drop(P, P);
 P til(P);
-P each(P, P);
+P each(std::function<P(P)> func, P p);
 P console(P);
-
-template<typename Func>
-P each(Func func, P p){
-    List lst = std::get<List>(p.data);
-    for(auto& ele : lst){
-        ele = func(ele);
-    }
-    return {lst};
-}
 
 };
