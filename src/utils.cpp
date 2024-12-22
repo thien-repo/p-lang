@@ -40,11 +40,13 @@ bool next_expression(std::istream& stream, std::string& out, int& line){
             do{
                 stream.get(c);
             }while(c != '\n');
+            expression << ' ';
             line++;
             continue;
         }
         if(c == '\n'){
             line++;
+            expression << ' ';
             continue;
         }
         if(expression.str().empty() and c == ' '){
@@ -87,10 +89,18 @@ bool next_token(std::istream& stream, std::string& out){
         return false;
     }   
     char c;
+    while (stream.peek() == ' ' or stream.peek() == '\t'){
+        stream.get(c);
+    }
+    
     std::stringstream token;
     while(legal(stream.peek())){
         stream.get(c);
         token << c;
+    }
+    if(not token.str().empty()){
+        out = token.str();
+        return true;  
     }
     if(stream.peek() == '\"'){
         stream.get(c);
@@ -102,9 +112,7 @@ bool next_token(std::istream& stream, std::string& out){
         out = token.str();
         return true;
     }
-    if(not token.str().empty()){
-        out = token.str();  
-    }
+
     else if(is_operator(stream.peek())){
         stream.get(c);
         token << c;
@@ -118,10 +126,6 @@ bool next_token(std::istream& stream, std::string& out){
             return true;
         }
     }
-    else if(stream.peek() == ' '){
-        stream.get(c);
-        return next_token(stream, out);
-    }
     return true;
 }
 
@@ -133,13 +137,16 @@ static std::unordered_map<std::string, std::function<P(P,P)>> operators = {
     {"%", [](P a,P b) ->P { return {pi(a) % pi(b)}; }},
 };
 
-bool evaluate(std::string expression,Scope& scope){
+P evaluate(std::string expression, Scope& scope){
     std::stringstream stream(expression);
     std::string token;
     std::stack<std::string> st;
+    std::cout << "tokens: ";
     while(next_token(stream, token)){
+        std::cout << token << " ";
         st.push(token);
     }
+    std::cout << std::endl;
     std::stack<P> values;
     while(not st.empty()){
         std::string token = st.top();
@@ -172,7 +179,7 @@ bool evaluate(std::string expression,Scope& scope){
             }
             values.push(scope.get(token));
         }
-        if(token == ":"){
+        else if(token == ":"){
             std::string name = st.top();
             st.pop();
            P value = values.top();
@@ -196,9 +203,12 @@ bool evaluate(std::string expression,Scope& scope){
             std::string str = token.substr(1, token.size() - 2);
             values.push(P(str));
         }
+        else{
+            return error("Unknown token: " + token);
+        }
     }
 
-    return true;
+    return P(0);
 }
 
 

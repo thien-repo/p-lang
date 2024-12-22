@@ -8,7 +8,7 @@ namespace PL {
 bool next_token(std::istream& stream, std::string& out);
 bool next_expression(std::istream& stream, std::string& out, int& line);
 
-bool evaluate(std::string expression, Scope& scope);
+P evaluate(std::string expression, Scope& scope);
 
 }
 

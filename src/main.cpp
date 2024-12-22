@@ -22,7 +22,13 @@ int main(int argc, char** argv) {
         scope.set(keyword, P());
     }
     while(PL::next_expression(stream, expression, line)){
-        evaluate(expression, scope);
+        std::cout << "expression: " << expression << std::endl;
+
+        P result = evaluate(expression, scope);
+        if( result.type == DATATYPE::ERRORVALUE){
+            std::cerr << "Error on line " << line << ": " << ps(result) << std::endl;
+            return 1;
+        }
     }
 
     //scope.print();
