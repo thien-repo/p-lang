@@ -22,7 +22,6 @@ int main(int argc, char** argv) {
         scope.set(keyword, P());
     }
     while(PL::next_expression(stream, expression, line)){
-        std::cout << "expression: " << expression << std::endl;
 
         P result = evaluate(expression, scope);
         if( result.type == DATATYPE::ERRORVALUE){
