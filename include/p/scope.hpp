@@ -13,7 +13,7 @@ class Scope{
         void print();
     private:
         Scope* parent;
-        std::map<std::string, P> variables;
+        std::unordered_map<std::string, P> variables;
 };
 
 }
