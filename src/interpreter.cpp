@@ -112,47 +112,41 @@ P Interpreter::interpret(std::stack<Token>& tokens){
             return P();
 }
 
-
-
-        P Interpreter::handle_keyword(std::string keyword){
-            P value = values.top();
-            values.pop();
-            if(keyword == "system"){
-                P res = system_call(value);
-                if(res.type == DATATYPE::ERRORVALUE){
-                    return res;
-                }
-                values.push(res);
-            }
-            if(keyword == "console"){
-                std::cout << tos(value) << std::endl;
-            }
-            return P();
+P Interpreter::handle_keyword(std::string keyword){
+    P value = values.top();
+    values.pop();
+    if(keyword == "system"){
+        P res = system_call(value);
+        if(res.type == DATATYPE::ERRORVALUE){
+            return res;
         }
+        values.push(res);
+    }
+    if(keyword == "console"){
+        std::cout << tos(value) << std::endl;
+    }
+    return P();
+}
 
-        P Interpreter::handle_math(std::string& op, P& left, P& right){
-            if(left.type == DATATYPE::INTEGER and right.type == DATATYPE::INTEGER){
-                long l = pi(left);
-                long r = pi(right);
-                if(op == "+") return P(l + r);
-                if(op == "-") return P(l - r);
-                if(op == "*") return P(l * r);
-                if(op == "/") return P(l / r);
-                if(op == "%") return P(l % r);
-
-            }
-            if(left.type == DATATYPE::FLOAT or right.type == DATATYPE::FLOAT){
-                double l = pi(left);
-                double r = pi(right);
-                if(op == "+") return P(l + r);
-                if(op == "-") return P(l - r); 
-                if(op == "*") return P(l * r);
-                if(op == "/") return P(l / r);
-
-            }
-
-            return error("Invalid operation: " + tos(left) + " " + op + " " + tos(right));
-        }
-
+P Interpreter::handle_math(std::string& op, P& left, P& right){
+    if(left.type == DATATYPE::INTEGER and right.type == DATATYPE::INTEGER){
+        long l = pi(left);
+        long r = pi(right);
+        if(op == "+") return P(l + r);
+        if(op == "-") return P(l - r);
+        if(op == "*") return P(l * r);
+        if(op == "/") return P(l / r);
+        if(op == "%") return P(l % r);
+    }
+    if(left.type == DATATYPE::FLOAT or right.type == DATATYPE::FLOAT){
+        double l = pi(left);
+        double r = pi(right);
+        if(op == "+") return P(l + r);
+        if(op == "-") return P(l - r); 
+        if(op == "*") return P(l * r);
+        if(op == "/") return P(l / r);
+    }
+    return error("Invalid operation: " + tos(left) + " " + op + " " + tos(right));
+}
 
 }
