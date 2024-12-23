@@ -141,12 +141,9 @@ P evaluate(std::string expression, Scope& scope){
     std::stringstream stream(expression);
     std::string token;
     std::stack<std::string> st;
-    std::cout << "tokens: ";
     while(next_token(stream, token)){
-        std::cout << token << " ";
         st.push(token);
     }
-    std::cout << std::endl;
     std::stack<P> values;
     while(not st.empty()){
         std::string token = st.top();

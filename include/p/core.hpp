@@ -4,3 +4,6 @@
 #include <p/conversions.hpp>
 #include <p/scope.hpp>
 #include <p/utils.hpp>
+#include <p/lexer.hpp>
+#include <p/tokenizer.hpp>
+#include <p/interpreter.hpp>

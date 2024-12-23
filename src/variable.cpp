@@ -13,7 +13,7 @@ P::P(std::string data) : type(DATATYPE::STRING) , data(data) {}
 P::P(const char* data) : type(DATATYPE::STRING) , data(data) {}
 P::P(List data) : type(DATATYPE::LIST) , data(data) {}
 P::P(Dict data) : type(DATATYPE::DICTIONARY) , data(data){}
-
+P::P(Function data) : type(DATATYPE::FUNCTION) , data(data){}
 P error(std::string msg){ return P(DATATYPE::ERRORVALUE, msg); };
 
 }
