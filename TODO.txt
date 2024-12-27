@@ -1,0 +1,9 @@
+x assignment for integers
+_ assignment for floats
+_ assignment for strings
+_ assignment for dictionaries
+_ assigment for functions
+_ assignment for lists
+_ loops
+_ control structures
+_ io instructions 
