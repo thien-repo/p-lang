@@ -8,6 +8,7 @@ enum TOKEN_TYPE {
     DECIMAL,
     BOOL,
     OPERATOR,
+    FUNC
 };
 
 const std::string TOKEN_STRINGS[] = {
@@ -16,6 +17,7 @@ const std::string TOKEN_STRINGS[] = {
     "DECIMAL",
     "BOOL",
     "OPERATOR",
+    "FUNC"
 };
 
 struct Token {
@@ -33,8 +35,9 @@ class Tokenizer {
         std::istream& stream;
         int line;
         char c;
-        bool starts_with_digit(Token& token);
-        bool starts_with_letter(Token& token);
+        bool starts_with_digit(Token&);
+        bool starts_with_curly_bracket(Token&);
+        bool starts_with_letter(Token&);
 };
 
 }

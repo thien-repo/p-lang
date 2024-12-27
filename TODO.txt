@@ -7,3 +7,4 @@ _ assignment for lists
 _ loops
 _ control structures
 _ io instructions 
+_ function calls

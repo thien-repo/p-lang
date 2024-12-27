@@ -1,7 +1,7 @@
 #include <p/tokenizer.hpp>
 #include <iostream>
 #include <sstream>
-
+#include <stack>
 namespace PL{
 
 Tokenizer::Tokenizer(std::istream& stream, int line): stream(stream) , line(line) { 
@@ -16,6 +16,9 @@ bool Tokenizer::next_token(Token& token){
         return false;
     }
     stream.get(c);
+    if(c == '{'){
+        return starts_with_curly_bracket(token);
+    }
     if(isspace(c)){
         if(c == '\n'){
             line++;
@@ -71,6 +74,26 @@ bool Tokenizer::starts_with_letter(Token& token){
     token.value = value.str();
     token.type = TOKEN_TYPE::IDENTIFIER;
     return true;
+}
+
+bool Tokenizer::starts_with_curly_bracket(Token& token){
+    std::stringstream value;
+    value << "{";
+    std::stack<char> st;
+    st.push('}');
+    while(not st.empty() and stream.get(c)){
+        if(c == '{'){
+            st.push('}');
+        }
+        else if( c == '}'){
+            st.pop();
+        }
+        value << c;
+    }
+    token.value =  value.str();
+    token.type = TOKEN_TYPE::FUNC;
+
+    return st.empty();
 }
 
 }

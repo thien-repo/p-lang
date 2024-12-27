@@ -9,7 +9,7 @@ namespace PL{
 class Interpreter {
     public:
         Interpreter(Scope* scope) : scope(scope) {}
-        P interpret(std::stack<Token>& tokens);
+        P interpret(std::stack<Token>&);
     private:
         std::stack<P> values;
         Scope* scope;
