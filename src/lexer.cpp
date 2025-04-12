@@ -57,8 +57,13 @@ bool Lexer::starts_with_digit(Token& token){
         }
         value << c;
     };
+    if(dots){
+        token.type = TOKEN_TYPE::DECIMAL;
+    }
+    else{
+        token.type = TOKEN_TYPE::INT;
+    }
     token.value = value.str();
-    token.type = TOKEN_TYPE::INT;
     return true;
 }
 

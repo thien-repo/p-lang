@@ -5,10 +5,6 @@
 
 namespace PL{
 
-const std::vector<std::string> keywords = {
-    "console", "system",
-};
-
 P system_call(P value){
     std::string command = ps(value);
     FILE* pipe = popen(command.c_str(), "r");

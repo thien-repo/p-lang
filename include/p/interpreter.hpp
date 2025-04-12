@@ -15,6 +15,9 @@ class Interpreter {
         Scope* scope;
         P handle_keyword(std::string keyword);
         P handle_math(std::string& op, P& left, P& right);
+        const std::vector<std::string> keywords = {
+            "console", "system",
+        };
 };
 
 }
