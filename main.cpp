@@ -11,14 +11,14 @@ int main(int argc, char** argv){
     std::string expression;
     int line = 1;
     Scope scope;
-    Lexer lexer(stream, line);
-    while(lexer.next_expression(expression)){
+    Parser parser(stream, line);
+    while(parser.next_expression(expression)){
         std::cout << expression << std::endl;
         std::stringstream estream(expression);
         Token token;
-        Tokenizer tokenizer(estream, line);
+        Lexer lexer(estream, line);
         std::stack<Token> tokens;
-        while(tokenizer.next_token(token)){
+        while(lexer.next_token(token)){
             std::cout << token.value << " | " << TOKEN_STRINGS[token.type] << std::endl;
             tokens.push(token);
         }

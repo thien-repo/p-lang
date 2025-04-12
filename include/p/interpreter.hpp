@@ -3,7 +3,7 @@
 #include <stack>
 #include <p/variable.hpp>
 #include <p/scope.hpp>
-#include <p/tokenizer.hpp>
+#include <p/lexer.hpp>
 
 namespace PL{
 class Interpreter {
